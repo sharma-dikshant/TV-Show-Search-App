@@ -11,6 +11,21 @@ form.addEventListener("submit", async (evt) => {
       }
     }
   }
+  const loadingImg = document.createElement("div");
+  loadingImg.innerHTML = `
+  <div class="banter-loader">
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+</div>
+  `;
+  showContainer.appendChild(loadingImg);
 
   const submitbtn = this.document.querySelector(
     `.search button[value="submit"]`
@@ -21,6 +36,7 @@ form.addEventListener("submit", async (evt) => {
     const response = await axios.get(
       `https://api.tvmaze.com/search/shows?q=${query}`
     );
+    showContainer.removeChild(loadingImg);
     console.log(response.data);
     console.log();
     showImages(response.data);
